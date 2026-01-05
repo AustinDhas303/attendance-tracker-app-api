@@ -33,4 +33,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	@Query("Select u from User u where u.userId=:userId")
 	User getUser(@Param("userId") Long userId);
 	
+	@Query("select count(u) from User u where u.role.roleId = 2")
+	Integer getTotalTeacher();
+	
 }

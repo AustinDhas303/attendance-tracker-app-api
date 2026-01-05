@@ -1,5 +1,6 @@
 package com.ams.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.ams.util.AttendanceStatus;

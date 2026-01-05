@@ -135,26 +135,29 @@ public class UserService {
 
 	public Map<String, String> updateUser(UserDTO userDTO) {
 		// TODO Auto-generated method stub
+		
 		Map<String, String> response = new HashMap<>();
 
-	    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	    String emailId = userDetails.getUsername();
-	    User loggedInUser = userRepository.getEmail(emailId);
+//	    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//	    String emailId = userDetails.getUsername();
+	    User loggedInUser = userRepository.getEmail(userDTO.getEmailId());
+	    Integer roleId = loggedInUser.getRole().getRoleId();
 
-	    if (loggedInUser == null) {
-	        response.put("status", "fail");
-	        response.put("message", "User not found in system.");
-	        return response;
-	    }
+//	    if (loggedInUser == null) {
+//	        response.put("status", "fail");
+//	        response.put("message", "User not found in system.");
+//	        return response;
+//	    }
+//
+//	    Long requestedUserId = userDTO.getUserId();
 
-	    Long requestedUserId = userDTO.getUserId();
+//	    if (!loggedInUser.getUserId().equals(requestedUserId)) {
+//	        response.put("status", "unauthorized");
+//	        response.put("message", "You can only update your own profile.");
+//	        return response;
+//	    }
 
-	    if (!loggedInUser.getUserId().equals(requestedUserId)) {
-	        response.put("status", "unauthorized");
-	        response.put("message", "You can only update your own profile.");
-	        return response;
-	    }
-
+	    if(roleId == 1 || roleId == 2) {
 	    loggedInUser.setFirstName(userDTO.getFirstName());
 	    loggedInUser.setLastName(userDTO.getLastName());
 	    loggedInUser.setEmailId(userDTO.getEmailId());
@@ -165,6 +168,10 @@ public class UserService {
 
 	    response.put("status", "success");
 	    response.put("message", "Profile updated successfully.");
+	    }else {
+	    	response.put("status", "fail");
+	        response.put("message", "User not found in system.");
+	    }
 	    return response;
 	}
 

@@ -20,5 +20,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer>{
 	@Query("SELECT s FROM Student s WHERE (:student IS NULL OR LOWER(s.studentName) LIKE LOWER(CONCAT(:student, '%'))) ORDER BY s.studentName DESC")
 	List<Student> getAllStudent(Pageable pageable, String student);
 
+	@Query("Select count(s) from Student s")
+	Integer getStudentCount();
+
 
 }

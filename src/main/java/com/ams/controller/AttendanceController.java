@@ -3,6 +3,7 @@ package com.ams.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.ams.service.AttendanceService;
 
 @RestController
 @RequestMapping("/api/v1/attendance")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AttendanceController {
 	
 	@Autowired
@@ -40,7 +42,7 @@ public class AttendanceController {
 	}
 	
 	@GetMapping("/fetch")
-	public AttendanceResponseDTO fetchAttendance(@RequestParam int page, @RequestParam int size, @RequestParam String studentName){
-		return attendanceService.fetchAttendance(page, size, studentName);
+	public AttendanceResponseDTO fetchAttendance(@RequestParam int page, @RequestParam int size, @RequestParam String studentName, @RequestParam String attendanceStatus){
+		return attendanceService.fetchAttendance(page, size, studentName, attendanceStatus);
 	}
 }
