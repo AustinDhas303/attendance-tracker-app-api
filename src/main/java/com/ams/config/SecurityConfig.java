@@ -38,10 +38,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/jwt/login", "api/v1/user/register").permitAll()
+                        .requestMatchers("/api/v1/jwt/login", "/api/v1/user/register").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-//                        .requestMatchers("/admin/**").hasAuthority("Admin")
-//                        .requestMatchers("/user/**").hasAuthority("User")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
