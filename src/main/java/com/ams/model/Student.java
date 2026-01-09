@@ -14,7 +14,7 @@ import lombok.Data;
 public class Student {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer studentId;
 	
 	private Integer rollNo;
