@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,11 @@ import com.ams.service.AttendanceService;
 
 @RestController
 @RequestMapping("/api/v1/attendance")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(
+	    origins = "https://attendance-tracker-app.onrender.com",
+	    allowedHeaders = "*",
+	    methods = {RequestMethod.POST, RequestMethod.OPTIONS}
+	)
 public class AttendanceController {
 	
 	@Autowired
