@@ -15,12 +15,12 @@ import com.ams.dto.UserResponseDTO;
 import com.ams.service.DashboardService;
 
 @RestController
-@RequestMapping("/api/v1/dashboard")
 @CrossOrigin(
 	    origins = "https://attendance-tracker-app.onrender.com",
 	    allowedHeaders = "*",
 	    methods = {RequestMethod.POST, RequestMethod.OPTIONS}
 	)
+@RequestMapping("/api/v1/dashboard")
 public class DashboardController {
 
 	@Autowired

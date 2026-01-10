@@ -21,12 +21,12 @@ import com.ams.service.UserService;
 import com.ams.dto.UserResponseDTO;
 
 @RestController
-@RequestMapping("/api/v1/user")
 @CrossOrigin(
 	    origins = "https://attendance-tracker-app-front-end.onrender.com",
 	    allowedHeaders = "*",
 	    methods = {RequestMethod.POST, RequestMethod.OPTIONS}
 	)
+@RequestMapping("/api/v1/user")
 public class UserController {
 	
 	@Autowired

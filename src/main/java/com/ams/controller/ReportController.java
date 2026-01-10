@@ -20,12 +20,12 @@ import com.ams.dto.UserDTO;
 import com.ams.service.ReportService;
 
 @RestController
-@RequestMapping("/api/v1/report")
 @CrossOrigin(
 	    origins = "https://attendance-tracker-app.onrender.com",
 	    allowedHeaders = "*",
 	    methods = {RequestMethod.POST, RequestMethod.OPTIONS}
 	)
+@RequestMapping("/api/v1/report")
 public class ReportController {
 	
 	@Autowired

@@ -20,12 +20,12 @@ import com.ams.dto.StudentResponseDTO;
 import com.ams.service.StudentService;
 
 @RestController
-@RequestMapping("/api/v1/student")
 @CrossOrigin(
 	    origins = "https://attendance-tracker-app.onrender.com",
 	    allowedHeaders = "*",
 	    methods = {RequestMethod.POST, RequestMethod.OPTIONS}
 	)
+@RequestMapping("/api/v1/student")
 public class StudentController {
 	
 	@Autowired
