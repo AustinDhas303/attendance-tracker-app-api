@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,18 +35,23 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/jwt/login", "/api/v1/user/register").permitAll()
-                        .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+    	return http
+    	        .csrf(AbstractHttpConfigurer::disable)
+    	        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+    	        .authorizeHttpRequests(auth -> auth
+    	        	    .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+    	        	    .requestMatchers(
+    	        	        "/api/v1/jwt/login",
+    	        	        "/api/v1/user/register"
+    	        	    ).permitAll()
+    	        	    .anyRequest().authenticated()
+    	        	)
+    	        .sessionManagement(session ->
+    	            session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    	        )
+    	        .authenticationProvider(authenticationProvider())
+    	        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+    	        .build();
     }
 
     @Bean
@@ -76,14 +82,19 @@ public class SecurityConfig {
     }
 
     private UrlBasedCorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-//        config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of("https://attendance-tracker-app-front-end.onrender.com"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+    	CorsConfiguration config = new CorsConfiguration();
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        config.setAllowedOrigins(
+            List.of("https://attendance-tracker-app-front-end.onrender.com")
+        );
+        config.setAllowedMethods(
+            List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        );
+        config.setAllowedHeaders(List.of("*"));
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
+
         return source;
     }
 
