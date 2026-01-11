@@ -28,17 +28,16 @@ public class JwtFilter extends OncePerRequestFilter{
     private CustomUserDetailsService userDetailsService;
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.equals("/api/v1/user/register")
+            || path.equals("/api/v1/jwt/login")
+            || request.getMethod().equals("OPTIONS");
+    }
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-    	
-    	String path = request.getRequestURI();
-
-    	if (path.contains("/api/v1/user/register")
-    	        || path.contains("/api/v1/jwt/login")
-    	        || request.getMethod().equals("OPTIONS")) {
-    	    chain.doFilter(request, response);
-    	    return;
-    	}
         
         String authorizationHeader = request.getHeader("Authorization");
         System.err.println("request header -------->"+authorizationHeader);
