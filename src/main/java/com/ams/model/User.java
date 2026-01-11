@@ -43,7 +43,7 @@ public class User {
 	private String emailId;
 	
 	@Column(name="Status")
-	private int status;
+	private int status = 1;
 	
 	@Column(name = "ContactNo",length=10)
 	private String contactNo;
