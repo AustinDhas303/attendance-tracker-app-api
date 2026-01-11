@@ -29,10 +29,10 @@ public class JwtFilter extends OncePerRequestFilter{
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        String path = request.getRequestURI();
-        return path.equals("/api/v1/user/register")
-            || path.equals("/api/v1/jwt/login")
-            || request.getMethod().equals("OPTIONS");
+        String path = request.getServletPath();
+        return path.startsWith("/api/v1/user/register")
+            || path.startsWith("/api/v1/jwt/login")
+            || "OPTIONS".equalsIgnoreCase(request.getMethod());
     }
 
     @Override

@@ -21,7 +21,7 @@ import com.ams.service.AttendanceService;
 
 @RestController
 @CrossOrigin(
-	    origins = "https://attendance-tracker-app.onrender.com",
+	    origins = "https://attendance-tracker-app-front-end.onrender.com",
 	    allowedHeaders = "*",
 	    methods = {RequestMethod.POST, RequestMethod.OPTIONS}
 	)
