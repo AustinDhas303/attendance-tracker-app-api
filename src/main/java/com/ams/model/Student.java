@@ -15,12 +15,13 @@ public class Student {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "student_id")
 	private Integer studentId;
 	
 	private Integer rollNo;
-	@Column(length = 40, nullable = false)
+	@Column(name = "student_name", length = 40, nullable = false)
 	private String studentName;
-	@Column(length = 30, nullable = false)
+	@Column(name = "department", length = 30, nullable = false)
 	private String department;
 
 }

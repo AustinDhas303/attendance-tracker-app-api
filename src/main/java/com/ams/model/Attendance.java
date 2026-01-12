@@ -24,11 +24,14 @@ public class Attendance {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "attendance_id")
 	private Integer attendanceId;
 	
 	private LocalDateTime date;
+	@Column(name = "period_no")
 	private int periodNo;
 	@Enumerated(EnumType.STRING)
+	@Column(name = "attendance_status")
 	private AttendanceStatus attendanceStatus;
 	
 	@ManyToOne

@@ -27,36 +27,36 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "UserId")
+	@Column(name = "user_id")
 	private Long userId;
 	
-	@Column(name="FirstName",length=30) 
+	@Column(name="first_name",length=30) 
 	private String firstName;
 	
-	@Column(name="LastName",length=30) 
+	@Column(name="last_name",length=30) 
 	private String lastName;
 	
-	@Column(name = "Password")
+	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "Email",length=45)
+	@Column(name = "email_id",length=45)
 	private String emailId;
 	
-	@Column(name="Status")
-	private int status = 1;
+	@Column(name="status")
+	private int status;
 	
-	@Column(name = "ContactNo",length=10)
+	@Column(name = "contact_no",length=10)
 	private String contactNo;
 	
-	@Column(name = "Address",length=45)
+	@Column(name = "address",length=45)
 	private String address;
 	
-	@Column(name = "CreatedAt",updatable =false)
+	@Column(name = "created_at",updatable =false)
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created_At;
 	
-	@Column(name = "UpdatedAt")
+	@Column(name = "updated_at")
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updated_At;
